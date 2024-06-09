@@ -1,28 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Soru 1</title>
+    <style>
+        .selected {
+            color: darkred;
+            font-weight: bold;
+        }
+    </style>
 </head>
+
 <body>
     <h1>Soru 1</h1>
 
     <span>1'den 99'a kadar olan sayıları for döngüsü ile yanyana</span>
     <button id="siralaBtn" onclick="sirala()">Sırala</button>
     <br>
-    <button id="rastgeleBtn" disabled>Rastgele sayı seç</button>
+    <button id="rastgeleBtn" disabled onclick="rastgeleSec()">Rastgele sayı seç</button>
 
     <div id="sonuc"></div>
     <script>
-        function sirala(){
+        function sirala() {
             var sonucEl = document.getElementById("sonuc");
             var rastgeleBtn = document.getElementById("rastgeleBtn")
             var siralaBtn = document.getElementById("siralaBtn")
 
-            for (var i = 0; i <= 99; i++) {
-                sonucEl.innerHTML += i + " ";
-                if(i % 10 == 0){
+            sonucEl.innerHTML = "";
+            for (var i = 1; i <= 99; i++) {
+                sonucEl.innerHTML += '<span id="sayi' + i + '">' + i + '</span> ';
+                if (i % 10 === 0) {
                     sonucEl.innerHTML += "<br/>";
                 }
             }
@@ -30,6 +39,19 @@
             rastgeleBtn.disabled = false
             siralaBtn.disabled = true
         }
+
+        function rastgeleSec() {
+            var rastgeleSayi;
+            var seciliEleman;
+
+            do {
+                rastgeleSayi = Math.floor(Math.random() * 99) + 1;
+                seciliEleman = document.getElementById('sayi' + rastgeleSayi);
+            } while (seciliEleman.classList.contains('selected'));
+
+            seciliEleman.classList.add('selected');
+        }
     </script>
 </body>
+
 </html>
